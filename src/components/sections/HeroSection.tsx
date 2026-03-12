@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, Points, PointMaterial } from "@react-three/drei";
+import Link from "next/link";
 // @ts-ignore
 import * as random from "maath/random/dist/maath-random.esm";
 
@@ -128,9 +129,12 @@ export function HeroSection() {
 
 
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 pointer-events-auto">
-                    <button className="hero-cta w-full sm:w-auto px-8 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-bold tracking-wide rounded-full transition-all duration-300 shadow-lg shadow-brand-red/20 transform hover:-translate-y-1">
-                        Ver Portafolio
-                    </button>
+                    <Link href="/portafolio" className="hero-cta w-full sm:w-auto px-8 py-4 bg-brand-red text-white font-bold tracking-wide rounded-full transition-all duration-300 shadow-lg shadow-brand-red/20 transform hover:-translate-y-1 overflow-hidden relative group flex items-center justify-center">
+                        <span className="relative z-20 transition-transform duration-300 group-hover:scale-105">Ver Portafolio</span>
+                        <span className="absolute w-[150%] h-[200%] -top-8 -left-2 bg-white/20 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left z-0"></span>
+                        <span className="absolute w-[150%] h-[200%] -top-8 -left-2 bg-red-800/80 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left z-0"></span>
+                        <span className="absolute w-[150%] h-[200%] -top-8 -left-2 bg-brand-red-dark rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left z-0"></span>
+                    </Link>
                     <a
                         href="https://wa.me/5212722974528?text=Hola%20AXCAP,%20tengo%20un%20proyecto%20y%20me%20gustar%C3%ADa%20escribirles."
                         target="_blank"
