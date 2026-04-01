@@ -70,7 +70,7 @@ body {
   position: absolute;
   inset: -4px;
   border-radius: 10px;
-  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  background: linear-gradient(-45deg, #FF8C3A 0%, #E10600 100% );
   z-index: 1; /* Glow always visible under the black inner button */
   pointer-events: none;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -80,7 +80,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  background: linear-gradient(-45deg, #FF9F0A 0%, #D4500A 100% );
   z-index: 0; /* Blur behind everything */
   transform: scale(0.95);
   filter: blur(20px);
@@ -98,3 +98,34 @@ body {
 .btn-glow-uiverse:active::before {
   transform: scale(0.7);
 }
+
+/* Fluid Hero Background Blobs */
+.blob-1 { 
+  background: #FF6B1A; 
+  filter: blur(70px); 
+} 
+.blob-2 { 
+  background: #7A2000; 
+  filter: blur(70px); 
+} 
+.blob-3 { 
+  background: #FF8C3A; 
+  filter: blur(70px); 
+}
+
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(35vw, -25vh) scale(1.6); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1.2); }
+  50% { transform: translate(-35vw, 35vh) scale(0.7); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(0.8); }
+  50% { transform: translate(25vw, 35vh) scale(1.5); }
+}
+
+.animate-blob-1 { animation: blob-drift-1 12s infinite alternate ease-in-out; }
+.animate-blob-2 { animation: blob-drift-2 16s infinite alternate ease-in-out; }
+.animate-blob-3 { animation: blob-drift-3 10s infinite alternate ease-in-out; }
