@@ -8,12 +8,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const processSteps = [
-    { id: "01", title: "Discovery", desc: "Análisis inicial, investigación de mercado y definición de objetivos" },
-    { id: "02", title: "Estrategia", desc: "Planificación técnica, arquitectura de información y roadmap" },
-    { id: "03", title: "Diseño", desc: "Wireframes, prototipos y sistema de diseño visual" },
-    { id: "04", title: "Desarrollo", desc: "Implementación técnica con el stack tecnológico seleccionado" },
-    { id: "05", title: "Optimización", desc: "Testing, performance, SEO y ajustes pre-lanzamiento" },
-    { id: "06", title: "Lanzamiento", desc: "Despliegue, monitoreo y soporte post-lanzamiento" },
+    { id: "01", title: "Entendemos tu Negocio", desc: "Platicamos contigo para entender qué vendes, a quién le vendes y qué imagen quieres dar." },
+    { id: "02", title: "Propuesta Visual", desc: "Te presentamos un diseño profesional adaptado a los colores y estilo de tu marca." },
+    { id: "03", title: "Construcción", desc: "Armamos tu sistema o web para que funcione perfecto y rápido en cualquier celular." },
+    { id: "04", title: "Revisión Final", desc: "Nos aseguramos de que los botones de WhatsApp, formularios y catálogos funcionen sin fallas." },
+    { id: "05", title: "Entrega y Capacitación", desc: "Te damos las llaves de tu nuevo portal y te enseñamos a usarlo si es autoadministrable." },
+    { id: "06", title: "Resultados", desc: "Tu negocio ya está en internet, listo para atrapar nuevos clientes todos los días." },
 ];
 
 export function ProcessSection() {
@@ -52,10 +52,10 @@ export function ProcessSection() {
         >
             <div className="absolute top-12 md:top-24 left-4 md:left-12 z-10 w-full pr-8 max-w-7xl mx-auto">
                 <h2 className="text-sm font-bold tracking-[0.2em] text-brand-red uppercase mb-4">
-                    Nuestro Método
+                    Cómo Trabajamos
                 </h2>
                 <h3 className="text-4xl md:text-5xl lg:text-6xl font-black max-w-2xl leading-tight">
-                    De la idea a la ejecución perfecta.
+                    Sin tecnicismos. Así de fácil es lanzar tu portal.
                 </h3>
             </div>
 

@@ -2,19 +2,21 @@
 
 @theme inline {
   --color-background: var(--color-bg);
+  --color-background-alt: var(--color-bg-alt);
   --color-foreground: var(--color-text);
-  --color-brand-red: var(--color-brand-red);
-  --color-brand-red-dark: var(--color-red-dark);
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-primary-dark: var(--color-brand-dark);
   --color-muted: var(--color-muted);
   --font-sans: var(--font-primary);
 }
 
 :root {
-  --color-bg: #0B0B0F;
-  --color-brand-red: #E10600;
-  --color-red-dark: #8B0000;
-  --color-text: #FFFFFF;
-  --color-muted: #555555;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #FFFBF0;
+  --color-brand-primary: #FF9F0A; /* Vibrant Orange/Yellow from reference */
+  --color-brand-dark: #E68A00;
+  --color-text: #2D3748; /* Dark gray for optimal readability instead of white */
+  --color-muted: #718096;
   --font-primary: 'Inter', 'Geist', sans-serif;
   --anim-fast: 0.3s;
   --anim-base: 0.6s;
@@ -33,4 +35,66 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-primary);
+}
+
+/* From Uiverse.io by gharsh11032000 - Glow Button */ 
+/* From Uiverse.io Glow Button - Fixed Stacking Context */ 
+.btn-glow-uiverse {
+  position: relative;
+  width: 180px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.btn-glow-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  color: white;
+  border-radius: 8px;
+  z-index: 2;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.btn-glow-uiverse::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  z-index: 1; /* Glow always visible under the black inner button */
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-glow-uiverse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  z-index: 0; /* Blur behind everything */
+  transform: scale(0.95);
+  filter: blur(20px);
+  transition: all 0.6s ease;
+}
+
+.btn-glow-uiverse:hover::after {
+  filter: blur(30px);
+}
+
+.btn-glow-uiverse:hover::before {
+  transform: rotate(-180deg);
+}
+
+.btn-glow-uiverse:active::before {
+  transform: scale(0.7);
 }

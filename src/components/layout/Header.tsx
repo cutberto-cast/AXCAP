@@ -9,9 +9,9 @@ export function Header() {
     ];
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 py-6 px-4 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <Link href="/" className="text-2xl font-black tracking-widest text-white hover:text-brand-red transition-colors">
+        <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-5xl z-50 py-4 px-6 md:px-8 bg-white/10 backdrop-blur-xl border border-white/40 shadow-[inset_0_2px_4px_rgba(255,255,255,0.5),_0_8px_32px_rgba(0,0,0,0.15)] rounded-full transition-all duration-300">
+            <div className="flex justify-between items-center">
+                <Link href="/" className="text-2xl font-black tracking-widest text-white hover:text-white/80 transition-colors drop-shadow-md">
                     AXCAP
                 </Link>
 
@@ -21,7 +21,7 @@ export function Header() {
                             <li key={link.name}>
                                 <Link
                                     href={link.href}
-                                    className="text-sm font-medium tracking-wide text-white/80 hover:text-white transition-colors"
+                                    className="text-sm font-semibold tracking-wide text-white/90 hover:text-white transition-colors"
                                 >
                                     {link.name}
                                 </Link>
@@ -31,10 +31,10 @@ export function Header() {
                 </nav>
 
                 {/* Mobile Menu Button - Placeholder */}
-                <button className="md:hidden text-white flex flex-col gap-1.5 p-2">
-                    <span className="w-6 h-0.5 bg-white block"></span>
-                    <span className="w-6 h-0.5 bg-white block"></span>
-                    <span className="w-4 h-0.5 bg-white block ml-auto"></span>
+                <button className="md:hidden text-white flex flex-col gap-1.5 p-2 transition-transform hover:scale-110">
+                    <span className="w-6 h-0.5 bg-current block rounded-full"></span>
+                    <span className="w-6 h-0.5 bg-current block rounded-full"></span>
+                    <span className="w-4 h-0.5 bg-current block ml-auto rounded-full shadow-sm"></span>
                 </button>
             </div>
         </header>

@@ -6,21 +6,21 @@ import { cn } from "@/lib/utils";
 const testimonials = [
     {
         id: 1,
-        name: "Carolina Mendoza",
-        role: "CMO, Fintech Global",
-        quote: "AXCAP transformó por completo nuestra plataforma base. Su dominio de Next.js y metodologías de ingeniería lograron optimizar nuestros tiempos de carga en un 40%.",
+        name: "Carlos Mendoza",
+        role: "Dueño, Taller Mecánico",
+        quote: "Desde que AXCAP nos hizo la página web, llegan clientes nuevos todas las semanas preguntando por servicios que antes ni sabían que dábamos. Nos vemos mucho más grandes de lo que somos.",
     },
     {
         id: 2,
         name: "Javier Véliz",
-        role: "CEO, Retail Innovator",
-        quote: "La atención al detalle en animaciones y la experiencia de usuario es simplemente de nivel mundial. Entendieron exactamente cómo posicionarnos como una marca premium.",
+        role: "Fundador, Burger Station",
+        quote: "El menú digital nos salvó. Dejamos de pagar el 30% a las apps de envío, y ahora los clientes piden directo a nuestro WhatsApp sin que perdamos tiempo contestando mensajes.",
     },
     {
         id: 3,
         name: "Elena Torres",
-        role: "VP de Producto",
-        quote: "Un equipo de élite. La migración a una arquitectura moderna no solo mejoró el performance, sino que también nuestra tasa de conversión aumentó sustancialmente.",
+        role: "Directora, Clínica Estética",
+        quote: "Nos diseñaron una página hermosa que refleja exactamente la calidad de nuestra clínica. La gente llega con mucha más confianza a sus tratamientos y agendan más fácil.",
     },
 ];
 

@@ -52,10 +52,10 @@ export function CTASection() {
                         ¿Listo para empezar?
                     </h2>
                     <h3 className="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
-                        Escalemos tu <br /> negocio <span className="text-brand-red">digital.</span>
+                        Llevemos tu <br /> negocio a <span className="text-brand-red">internet.</span>
                     </h3>
                     <p className="text-muted text-lg md:text-xl max-w-2xl mx-auto">
-                        Completa el formulario a continuación y nuestro equipo de estrategia técnica se pondrá en contacto contigo en menos de 24 horas.
+                        Completa el formulario y te contactaremos en menos de 24 horas para platicar de tu negocio y cómo podemos ayudarte a vender más.
                     </p>
                 </div>
 
@@ -74,17 +74,16 @@ export function CTASection() {
                     <div className="flex flex-col gap-2 mb-6">
                         <label htmlFor="service" className="text-sm font-bold text-white/80 tracking-wide">Servicio de Interés</label>
                         <select id="service" required className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white/80 focus:outline-none focus:border-brand-red transition-colors appearance-none">
-                            <option value="">Selecciona un área</option>
-                            <option value="web">Desarrollo Web / Next.js</option>
-                            <option value="ecommerce">E-Commerce</option>
-                            <option value="uiux">Diseño UI/UX</option>
-                            <option value="ai">Implementación IA</option>
+                            <option value="">Selecciona un servicio</option>
+                            <option value="web">Página Web Profesional</option>
+                            <option value="menu">Menú Digital / Tienda</option>
+                            <option value="otro">Otro</option>
                         </select>
                     </div>
 
                     <div className="flex flex-col gap-2 mb-8">
                         <label htmlFor="message" className="text-sm font-bold text-white/80 tracking-wide">Detalles del Proyecto</label>
-                        <textarea id="message" required rows={4} className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-red transition-colors resize-none" placeholder="Cuéntanos sobre tus objetivos o el desafío tecnológico que enfrentas..." />
+                        <textarea id="message" required rows={4} className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-red transition-colors resize-none" placeholder="Cuéntanos de qué es tu negocio y qué te gustaría lograr..." />
                     </div>
 
                     <button
@@ -92,7 +91,7 @@ export function CTASection() {
                         disabled={formStatus !== "idle"}
                         className="w-full px-8 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-bold tracking-widest uppercase rounded-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
                     >
-                        {formStatus === "idle" && "Solicitar Propuesta"}
+                        {formStatus === "idle" && "Enviar Mensaje"}
                         {formStatus === "submitting" && "Enviando..."}
                         {formStatus === "success" && "¡Enviado Exitosamente!"}
 

@@ -22,7 +22,7 @@ export function ServicesSection() {
                     trigger: containerRef.current,
                     start: "top 80%",
                 },
-                y: 40,
+                y: 30,
                 opacity: 0,
                 duration: 0.8,
                 ease: "power3.out",
@@ -34,11 +34,11 @@ export function ServicesSection() {
                     trigger: ".services-grid",
                     start: "top 75%",
                 },
-                y: 50,
+                y: 60,
                 opacity: 0,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: "power2.out",
+                duration: 0.7,
+                stagger: 0.15,
+                ease: "back.out(1.2)",
             });
         } else {
             gsap.from([".service-header", ".service-card"], {
@@ -57,51 +57,58 @@ export function ServicesSection() {
         <section
             id="services"
             ref={containerRef}
-            className="py-32 px-4 md:px-12 bg-[#050508] relative z-10"
+            className="py-16 xl:py-24 px-4 md:px-12 bg-[#FFFDF8] relative z-10"
         >
-            <div className="max-w-7xl mx-auto service-header mb-16 md:mb-24">
-                <h2 className="text-sm font-bold tracking-[0.2em] text-brand-red uppercase mb-4">
-                    Nuestras Áreas de Práctica
+            <div className="max-w-7xl mx-auto service-header mb-12 xl:mb-16 text-center">
+                <h2 className="text-sm font-bold tracking-[0.2em] text-brand-primary uppercase mb-4">
+                    Nuestras Soluciones
                 </h2>
-                <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-white max-w-3xl leading-tight">
-                    Ingeniería de software para la próxima generación.
+                <h3 className="text-4xl md:text-5xl lg:text-5xl font-black text-[#2D3748] max-w-4xl mx-auto leading-tight">
+                    Herramientas digitales diseñadas para <span className="text-brand-primary">que tu negocio crezca.</span>
                 </h3>
             </div>
 
-            <div className="services-grid max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="services-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 {servicesData.map((service) => (
                     <Link
                         href={`/servicios/${service.slug}`}
                         key={service.id}
-                        className="service-card group relative border border-white/5 rounded-2xl p-8 transition-colors overflow-hidden block min-h-[400px]"
+                        className="service-card group bg-white rounded-[2rem] p-8 md:p-10 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_-10px_rgba(255,159,10,0.15)] transition-all duration-500 overflow-hidden relative flex flex-col items-center text-center transform hover:-translate-y-2 border border-gray-100"
                     >
-                        {/* Background Image */}
-                        <div className="absolute inset-0 z-0">
-                            <img src={service.image} alt={service.title} className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/80 to-transparent" />
-                        </div>
+                        {/* Blob decorativo de fondo */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:bg-brand-primary/10 transition-colors duration-500"></div>
 
-                        {/* Glow effect on hover */}
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red-dark to-brand-red opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-
-                        <div className="relative z-10 flex flex-col h-full">
-                            <div className="flex justify-between items-start mb-12">
-                                <div className="w-12 h-12 rounded-full bg-brand-red/10 flex items-center justify-center text-brand-red group-hover:scale-110 transition-transform duration-500 backdrop-blur-sm">
-                                    <div className="w-4 h-4 bg-brand-red rounded-sm rotate-45" />
-                                </div>
-                                <span className="text-5xl font-black text-white/20 group-hover:text-white/40 transition-colors duration-500">
-                                    {service.id}
-                                </span>
+                        <div className="relative z-10 flex flex-col items-center h-full w-full">
+                            {/* Icon Container */}
+                            <div className="w-20 h-20 mb-8 rounded-full bg-orange-50 flex items-center justify-center text-brand-primary group-hover:scale-110 group-hover:bg-brand-primary group-hover:text-white transition-all duration-500 relative">
+                                {/* SVG Generico basado en ID (Simplificado) */}
+                                {service.id === "01" ? (
+                                    <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" stroke="currentColor" strokeWidth="1.5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                ) : (
+                                    <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" stroke="currentColor" strokeWidth="1.5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                )}
                             </div>
 
-                            <div className="mt-auto">
-                                <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-brand-red transition-colors duration-300">
+                            <div className="mt-auto flex-grow flex flex-col justify-center">
+                                <h4 className="text-2xl font-bold text-[#2D3748] mb-4 group-hover:text-brand-primary transition-colors duration-300">
                                     {service.title}
                                 </h4>
 
-                                <p className="text-muted leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                                <p className="text-[#718096] text-lg leading-relaxed max-w-sm mx-auto">
                                     {service.shortDescription}
                                 </p>
+                            </div>
+
+                            <div className="mt-8 font-semibold text-brand-primary flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                                Descubrir más 
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
                             </div>
                         </div>
                     </Link>
