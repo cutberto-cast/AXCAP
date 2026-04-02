@@ -15,8 +15,8 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <HeroSection />
         <ServicesSection />
-        <ProcessSection />
         <PortfolioSection />
+        <ProcessSection />
 
         <TestimonialsSection />
         <CTASection />

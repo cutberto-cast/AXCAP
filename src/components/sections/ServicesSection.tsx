@@ -16,28 +16,34 @@ export function ServicesSection() {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         if (!prefersReducedMotion) {
-            gsap.from(".service-header", {
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 80%",
-                },
-                y: 40,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-            });
+            gsap.fromTo(".service-header",
+                { y: 40, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 85%",
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                }
+            );
 
-            gsap.from(".service-card", {
-                scrollTrigger: {
-                    trigger: ".services-grid",
-                    start: "top 80%",
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.15,
-                ease: "power3.out",
-            });
+            gsap.fromTo(".service-card",
+                { y: 50, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: ".services-grid",
+                        start: "top 85%",
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                }
+            );
         }
     }, { scope: containerRef });
 

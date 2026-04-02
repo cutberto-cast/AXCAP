@@ -18,17 +18,9 @@ export function HeroSection() {
             if (!prefersReducedMotion) {
                 const tl = gsap.timeline();
 
-                // Animación de entrada de textos
                 tl.fromTo(".hero-headline .line",
                     { y: 60, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: "power3.out",
-                        delay: 0.1,
-                    }
+                    { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out", delay: 0.1 }
                 );
 
                 tl.fromTo(".hero-subheadline",
@@ -49,7 +41,6 @@ export function HeroSection() {
                     "-=0.4"
                 );
 
-                // Animación de imagen / Modelo 3D
                 tl.fromTo(imgRef.current,
                     { x: 50, opacity: 0, rotation: 2 },
                     { x: 0, opacity: 1, rotation: 0, duration: 1, ease: "power3.out" },
@@ -57,7 +48,6 @@ export function HeroSection() {
                 );
 
             } else {
-                // Fallback accesible
                 gsap.fromTo(containerRef.current,
                     { opacity: 0 },
                     { opacity: 1, duration: 0.5 }
@@ -81,16 +71,23 @@ export function HeroSection() {
 
             <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-6 md:gap-10 lg:gap-12 w-full pointer-events-none">
 
+                {/* MOBILE ONLY: Modelo 3D encima del texto */}
+                <div className="block md:hidden order-first w-full h-[320px] sm:h-[400px] overflow-hidden -mt-4 mb-2 z-10 pointer-events-none">
+                    <div className="relative w-[130%] h-[130%] -translate-x-[11.5%] translate-y-[-8%] pointer-events-auto">
+                        <Spline
+                            scene="https://prod.spline.design/6OIW6ytVzNDQVyBu/scene.splinecode"
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
                 {/* Columna Izquierda: Textos Glass Card */}
                 <div ref={textRef} className="w-full md:w-1/2 text-left z-30 pointer-events-auto">
                     <div className="relative p-5 sm:p-6 lg:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-3xl border border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.3)] overflow-hidden">
 
-                        {/* Soft glow behind the card content */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
 
                         <div className="relative z-10">
-                            {/* Badge */}
-
                             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.25rem] font-medium text-white leading-[1.1] tracking-tight hero-headline mb-3 sm:mb-4 drop-shadow-sm">
                                 <div className="overflow-hidden"><span className="block line">Lleva Tu Negocio</span></div>
                                 <div className="overflow-hidden"><span className="block line text-white/90">Al Siguiente Nivel</span></div>
@@ -102,15 +99,13 @@ export function HeroSection() {
 
                             <div className="flex flex-col sm:flex-row xl:flex-row gap-2 sm:gap-3 items-center justify-start mt-5 sm:mt-8 w-full">
                                 <div className="hero-cta">
-                                    {/* Nuevo Botón Uiverse Gradient Glow - Stack Seguro */}
                                     <Link href="/portafolio" className="btn-glow-uiverse text-lg shadow-2xl">
                                         <span className="btn-glow-inner">Ver Servicios</span>
                                     </Link>
                                 </div>
 
-                                {/* Íconos sociales Interactivos (Tailwind Original) */}
                                 <div className="flex items-center gap-3 sm:gap-4 social-login-icons xl:pl-2">
-                                    {/* WhatsApp — Destacado con texto */}
+                                    {/* WhatsApp */}
                                     <a href="https://wa.me/522722974528?text=Hola%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto" target="_blank" rel="noopener noreferrer" className="group relative h-10 sm:h-12 rounded-full overflow-hidden flex flex-col cursor-pointer shadow-lg backdrop-blur-md bg-white/10 hover:shadow-[0_4px_30px_rgba(37,211,102,0.5)] transition-all duration-300" style={{ width: 'auto' }}>
                                         <div className="h-[200%] flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.46,-0.78,0.5,1.56)] group-hover:-translate-y-1/2">
                                             <div className="h-10 sm:h-12 flex items-center justify-center gap-2 px-4 sm:px-5">
@@ -143,6 +138,7 @@ export function HeroSection() {
                                             </div>
                                         </div>
                                     </a>
+
                                     {/* Facebook */}
                                     <a href="https://www.facebook.com/profile.php?id=61583469279335" target="_blank" rel="noopener noreferrer" className="group relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex flex-col cursor-pointer shadow-lg backdrop-blur-md bg-white/10 hover:shadow-[0_4px_30px_rgba(49,111,246,0.4)] transition-all duration-300">
                                         <div className="w-12 h-[200%] flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.46,-0.78,0.5,1.56)] group-hover:-translate-y-1/2">
@@ -181,10 +177,12 @@ export function HeroSection() {
                 </div>
             </div>
 
-            {/* Columna Derecha Dinámica: Modelo 3D */}
-            {/* On mobile: relative block visible below text. On desktop: absolute overlay */}
-            <div ref={imgRef} className="relative w-full h-[280px] sm:h-[350px] md:absolute md:right-[-10%] md:top-0 md:bottom-0 md:w-[60%] md:h-auto z-10 flex items-center justify-center pointer-events-none">
-                <div className="relative w-full h-full md:w-[110%] md:h-[110%] pointer-events-auto">
+            {/* DESKTOP ONLY: Modelo 3D — absolute overlay lado derecho */}
+            <div
+                ref={imgRef}
+                className="hidden md:flex relative w-full h-[280px] sm:h-[350px] md:absolute md:right-[-10%] md:top-0 md:bottom-0 md:w-[60%] md:h-auto z-10 items-center justify-center pointer-events-none"
+            >
+                <div className="relative w-full h-full md:w-[110%] md:h-[100%] pointer-events-auto">
                     <Spline
                         scene="https://prod.spline.design/6OIW6ytVzNDQVyBu/scene.splinecode"
                         className="w-full h-full object-cover"
@@ -194,4 +192,3 @@ export function HeroSection() {
         </section>
     );
 }
-
