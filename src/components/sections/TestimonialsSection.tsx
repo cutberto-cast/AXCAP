@@ -35,87 +35,73 @@ export function TestimonialsSection() {
         setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
     };
 
-    // Auto-play (opcional)
     useEffect(() => {
         const interval = setInterval(nextSlide, 8000);
         return () => clearInterval(interval);
     }, [nextSlide]);
 
     return (
-        <section id="testimonials" className="py-24 md:py-32 px-4 bg-[#0a0a0f] relative z-10 w-full overflow-hidden flex flex-col items-center">
-            <div className="text-center mb-16 max-w-2xl mx-auto">
-                <h2 className="text-sm font-bold tracking-[0.2em] text-brand-red uppercase mb-4">
+        <section id="testimonials" className="py-20 px-4 sm:px-6 bg-white relative z-10 w-full overflow-hidden flex flex-col items-center">
+            <div className="text-center mb-10 sm:mb-14 max-w-2xl mx-auto relative z-20">
+                <h2 className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#D4500A] uppercase mb-3">
                     Testimonios
                 </h2>
-                <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-medium text-[#2D3748] leading-[1.15] tracking-tight">
                     Nuestros clientes como principal aval.
                 </h3>
             </div>
 
-            <div className="relative w-full max-w-4xl min-h-[400px] flex items-center justify-center -mt-8 perspective-1000">
-                {testimonials.map((testimonio, index) => {
-                    // Determinar la posición relativa al índice actual para el efecto depth
-                    const offset = index - currentIndex;
-                    const isCurrent = offset === 0;
-                    const isNext = offset === 1 || (currentIndex === testimonials.length - 1 && index === 0);
-                    const isPrev = offset === -1 || (currentIndex === 0 && index === testimonials.length - 1);
+            {/* Testimonial Card — simple fade approach, works perfectly on mobile */}
+            <div className="relative w-full max-w-2xl mx-auto z-20">
+                {testimonials.map((testimonio, index) => (
+                    <div
+                        key={testimonio.id}
+                        className={cn(
+                            "transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                            index === currentIndex
+                                ? "relative opacity-100 translate-y-0"
+                                : "absolute inset-0 opacity-0 translate-y-4 pointer-events-none"
+                        )}
+                    >
+                        <div className="p-6 sm:p-10 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] bg-[#FFF8F3] border border-[#D4500A]/10 text-center shadow-[0_8px_32px_-12px_rgba(212,80,10,0.1)]">
+                            {/* Quote Mark */}
+                            <div className="text-[#D4500A]/20 text-6xl sm:text-7xl leading-none font-serif mb-4 select-none">"</div>
 
-                    let transformClass = "scale-75 opacity-0 z-0 translate-y-12"; // Default
-                    if (isCurrent) {
-                        transformClass = "scale-100 opacity-100 z-30 translate-y-0";
-                    } else if (isNext) {
-                        transformClass = "scale-90 opacity-40 z-20 translate-y-8 translate-x-12 md:translate-x-32";
-                    } else if (isPrev) {
-                        transformClass = "scale-90 opacity-40 z-20 translate-y-8 -translate-x-12 md:-translate-x-32";
-                    }
-
-                    return (
-                        <div
-                            key={testimonio.id}
-                            className={cn(
-                                "absolute transition-all duration-700 ease-in-out w-full max-w-lg md:max-w-2xl",
-                                "bg-white/[0.03] backdrop-blur-md border border-white/5 rounded-2xl p-8 md:p-12 shadow-2xl",
-                                "flex flex-col items-center text-center",
-                                transformClass
-                            )}
-                        >
-                            {/* Comillas decorativas rojas estilo glass */}
-                            <div className="mb-6 opacity-80 mix-blend-screen text-brand-red text-6xl leading-none font-serif">"</div>
-
-                            <p className="text-lg md:text-2xl text-white/90 font-medium leading-relaxed mb-8 italic">
+                            <p className="text-lg sm:text-xl md:text-2xl text-[#2D3748] font-medium leading-relaxed mb-8 italic">
                                 {testimonio.quote}
                             </p>
 
-                            <div className="mt-auto">
-                                <h4 className="text-white font-bold text-lg mb-1">{testimonio.name}</h4>
-                                <p className="text-brand-red text-sm font-semibold tracking-wide uppercase">{testimonio.role}</p>
-                            </div>
+                            {/* Separator */}
+                            <div className="w-10 h-[3px] bg-[#D4500A] rounded-full mx-auto mb-5" />
+
+                            <h4 className="text-[#2D3748] font-bold text-base sm:text-lg mb-1">{testimonio.name}</h4>
+                            <p className="text-[#D4500A] text-xs sm:text-sm font-semibold tracking-widest uppercase">{testimonio.role}</p>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
 
-            {/* Controles de navegación responsivos y accesibles */}
-            <div className="flex gap-4 mt-12 z-40 items-center justify-center">
+            {/* Controls */}
+            <div className="flex gap-4 sm:gap-6 mt-8 sm:mt-12 z-40 items-center justify-center">
                 <button
                     onClick={prevSlide}
                     aria-label="Testimonio anterior"
-                    className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-brand-red hover:border-brand-red text-white transition-all duration-300 transform hover:scale-110"
+                    className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-[#FFF8F3] border border-[#D4500A]/15 hover:bg-[#D4500A] hover:border-[#D4500A] text-[#D4500A] hover:text-white transition-all duration-300 group"
                 >
-                    {/* Arrow Left Icon placeholder */}
-                    <span className="block w-3 h-3 border-t-2 border-l-2 rotate-[-45deg] ml-1"></span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-0.5 transition-transform">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
                 </button>
 
-                {/* Puntos Indicadores */}
-                <div className="flex gap-2 mx-4">
+                <div className="flex gap-2 mx-2">
                     {testimonials.map((_, idx) => (
                         <button
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
                             aria-label={`Ir al testimonio ${idx + 1}`}
                             className={cn(
-                                "w-2.5 h-2.5 rounded-full transition-all duration-300",
-                                idx === currentIndex ? "bg-brand-red w-8" : "bg-white/20 hover:bg-white/40"
+                                "h-2 rounded-full transition-all duration-500",
+                                idx === currentIndex ? "bg-[#D4500A] w-8 sm:w-10" : "w-2 bg-[#D4500A]/20 hover:bg-[#D4500A]/40"
                             )}
                         />
                     ))}
@@ -124,10 +110,11 @@ export function TestimonialsSection() {
                 <button
                     onClick={nextSlide}
                     aria-label="Siguiente testimonio"
-                    className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-brand-red hover:border-brand-red text-white transition-all duration-300 transform hover:scale-110"
+                    className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-[#FFF8F3] border border-[#D4500A]/15 hover:bg-[#D4500A] hover:border-[#D4500A] text-[#D4500A] hover:text-white transition-all duration-300 group"
                 >
-                    {/* Arrow Right Icon placeholder */}
-                    <span className="block w-3 h-3 border-t-2 border-r-2 rotate-[45deg] mr-1"></span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 transition-transform">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                 </button>
             </div>
         </section>

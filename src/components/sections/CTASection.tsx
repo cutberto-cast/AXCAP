@@ -32,75 +32,101 @@ export function CTASection() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setFormStatus("submitting");
-        // Simular envío a API Route
         setTimeout(() => {
             setFormStatus("success");
-            // Reseteo visual tras unos segundos
             setTimeout(() => setFormStatus("idle"), 5000);
         }, 1500);
     };
 
     return (
-        <section id="contact" ref={sectionRef} className="py-24 md:py-32 px-4 relative z-10 w-full overflow-hidden">
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] to-[#1a0000] -z-10" />
+        <section id="contact" ref={sectionRef} className="py-20 px-4 sm:px-6 relative z-10 w-full overflow-hidden bg-[#D4500A]">
+            {/* Background Blobs */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60">
+                <div className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#FF6B1A] blur-[80px]" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[55%] h-[55%] rounded-full bg-[#7A2000] blur-[80px]" />
+            </div>
 
-            <div className="max-w-5xl mx-auto flex flex-col items-center">
+            <div className="max-w-5xl mx-auto flex flex-col items-center relative z-20">
 
-                <div className="text-center mb-12 cta-content">
-                    <h2 className="text-sm font-bold tracking-[0.2em] text-brand-red uppercase mb-4">
+                <div className="text-center mb-10 sm:mb-14 cta-content">
+                    <h2 className="text-xs sm:text-sm font-bold tracking-[0.2em] text-white/70 uppercase mb-3">
                         ¿Listo para empezar?
                     </h2>
-                    <h3 className="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
-                        Llevemos tu <br /> negocio a <span className="text-brand-red">internet.</span>
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.15] tracking-tight mb-5">
+                        Llevemos tu negocio a internet.
                     </h3>
-                    <p className="text-muted text-lg md:text-xl max-w-2xl mx-auto">
-                        Completa el formulario y te contactaremos en menos de 24 horas para platicar de tu negocio y cómo podemos ayudarte a vender más.
+                    <p className="text-white/80 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed font-light">
+                        Completa el formulario y te contactaremos en menos de 24 horas para platicar de tu negocio.
                     </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-10 cta-content">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor="name" className="text-sm font-bold text-white/80 tracking-wide">Nombre Completo</label>
-                            <input id="name" required type="text" className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-red transition-colors" placeholder="John Doe" />
+                <form onSubmit={handleSubmit} className="w-full max-w-xl cta-content p-6 sm:p-8 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_6px_rgba(255,255,255,0.2)]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-5">
+                        <div className="flex flex-col gap-1.5">
+                            <label htmlFor="name" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Nombre</label>
+                            <input
+                                id="name"
+                                required
+                                type="text"
+                                className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all"
+                                placeholder="Tu nombre"
+                            />
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor="email" className="text-sm font-bold text-white/80 tracking-wide">Email Corporativo</label>
-                            <input id="email" required type="email" className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-red transition-colors" placeholder="john@empresa.com" />
+                        <div className="flex flex-col gap-1.5">
+                            <label htmlFor="email" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Email</label>
+                            <input
+                                id="email"
+                                required
+                                type="email"
+                                className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all"
+                                placeholder="tu@email.com"
+                            />
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-2 mb-6">
-                        <label htmlFor="service" className="text-sm font-bold text-white/80 tracking-wide">Servicio de Interés</label>
-                        <select id="service" required className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white/80 focus:outline-none focus:border-brand-red transition-colors appearance-none">
-                            <option value="">Selecciona un servicio</option>
-                            <option value="web">Página Web Profesional</option>
-                            <option value="menu">Menú Digital / Tienda</option>
-                            <option value="otro">Otro</option>
+                    <div className="flex flex-col gap-1.5 mb-5">
+                        <label htmlFor="service" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Servicio</label>
+                        <select
+                            id="service"
+                            required
+                            className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all appearance-none cursor-pointer"
+                        >
+                            <option value="" className="text-gray-900">Selecciona un servicio</option>
+                            <option value="web" className="text-gray-900">Página Web Profesional</option>
+                            <option value="menu" className="text-gray-900">Menú Digital / Tienda</option>
+                            <option value="otro" className="text-gray-900">Otro</option>
                         </select>
                     </div>
 
-                    <div className="flex flex-col gap-2 mb-8">
-                        <label htmlFor="message" className="text-sm font-bold text-white/80 tracking-wide">Detalles del Proyecto</label>
-                        <textarea id="message" required rows={4} className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-red transition-colors resize-none" placeholder="Cuéntanos de qué es tu negocio y qué te gustaría lograr..." />
+                    <div className="flex flex-col gap-1.5 mb-6">
+                        <label htmlFor="message" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Cuéntanos</label>
+                        <textarea
+                            id="message"
+                            required
+                            rows={3}
+                            className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all resize-none"
+                            placeholder="De qué es tu negocio y qué te gustaría lograr..."
+                        />
                     </div>
 
                     <button
                         type="submit"
                         disabled={formStatus !== "idle"}
-                        className="w-full px-8 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-bold tracking-widest uppercase rounded-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
+                        className="btn-glow-uiverse w-full text-sm sm:text-base"
                     >
-                        {formStatus === "idle" && "Enviar Mensaje"}
-                        {formStatus === "submitting" && "Enviando..."}
-                        {formStatus === "success" && "¡Enviado Exitosamente!"}
+                        <span className="btn-glow-inner flex items-center justify-center gap-2">
+                            {formStatus === "idle" && "Enviar Mensaje"}
+                            {formStatus === "submitting" && "Enviando..."}
+                            {formStatus === "success" && "¡Enviado!"}
 
-                        {formStatus === "idle" && (
-                            <div className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 group-hover:left-[200%] transition-all duration-1000 ease-in-out" />
-                        )}
+                            {formStatus === "idle" && (
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            )}
+                        </span>
                     </button>
                 </form>
-
             </div>
         </section>
     );

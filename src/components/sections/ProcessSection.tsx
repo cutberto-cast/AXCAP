@@ -18,28 +18,32 @@ const processSteps = [
 
 export function ProcessSection() {
     const sectionRef = useRef<HTMLElement>(null);
-    const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        if (!prefersReducedMotion && scrollWrapperRef.current) {
-            const sections = gsap.utils.toArray(".process-step");
-
-            // Calculate total scroll distance based on number of items
-            const totalWidth = scrollWrapperRef.current.scrollWidth;
-            const amountToScroll = totalWidth - window.innerWidth;
-
-            gsap.to(sections, {
-                x: () => -amountToScroll,
-                ease: "none",
+        if (!prefersReducedMotion && sectionRef.current) {
+            gsap.from(".process-header", {
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    pin: true,
-                    scrub: 1,
-                    snap: 1 / (sections.length - 1),
-                    end: () => `+=${amountToScroll}`,
-                }
+                    start: "top 80%",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+            });
+
+            gsap.from(".process-card", {
+                scrollTrigger: {
+                    trigger: ".process-grid",
+                    start: "top 80%",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.7,
+                stagger: 0.12,
+                ease: "power3.out",
             });
         }
     }, { scope: sectionRef });
@@ -48,40 +52,48 @@ export function ProcessSection() {
         <section
             id="process"
             ref={sectionRef}
-            className="bg-black text-white h-screen flex flex-col justify-center overflow-hidden relative w-full max-w-[100vw]"
+            className="py-20 px-4 sm:px-6 md:px-12 bg-white relative z-10 overflow-hidden"
         >
-            <div className="absolute top-12 md:top-24 left-4 md:left-12 z-10 w-full pr-8 max-w-7xl mx-auto">
-                <h2 className="text-sm font-bold tracking-[0.2em] text-brand-red uppercase mb-4">
-                    Cómo Trabajamos
-                </h2>
-                <h3 className="text-4xl md:text-5xl lg:text-6xl font-black max-w-2xl leading-tight">
-                    Sin tecnicismos. Así de fácil es lanzar tu portal.
-                </h3>
-            </div>
+            <div className="max-w-6xl mx-auto relative z-20">
+                {/* Header */}
+                <div className="process-header mb-12 sm:mb-16 text-center">
+                    <h2 className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#D4500A] uppercase mb-3">
+                        Cómo Trabajamos
+                    </h2>
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-medium text-[#2D3748] max-w-3xl mx-auto leading-[1.15] tracking-tight">
+                        Sin tecnicismos. Así de fácil es lanzar tu portal.
+                    </h3>
+                </div>
 
-            {/* Horizontal Scroll Wrapper */}
-            <div
-                ref={scrollWrapperRef}
-                className="flex mt-32 md:mt-48 px-4 md:px-12 gap-8 md:gap-16 w-max flex-nowrap"
-            >
-                {processSteps.map((step) => (
-                    <div
-                        key={step.id}
-                        className="process-step w-[85vw] md:w-[400px] flex-shrink-0 flex flex-col pt-12 relative"
-                    >
-                        {/* Timeline Line */}
-                        <div className="absolute top-0 left-0 w-full h-[1px] bg-white/20">
-                            <div className="h-full bg-brand-red w-full scale-x-0 origin-left transition-transform duration-700 group-hover:scale-x-100" />
+                {/* Vertical Timeline for Mobile, Grid for Desktop */}
+                <div className="process-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    {processSteps.map((step, index) => (
+                        <div
+                            key={step.id}
+                            className="process-card group relative"
+                        >
+                            <div className="relative p-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-[#FFF8F3] border border-[#D4500A]/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_-12px_rgba(212,80,10,0.15)] hover:border-[#D4500A]/25 h-full flex flex-col">
+                                {/* Connecting Line (desktop only) */}
+                                {index < processSteps.length - 1 && (
+                                    <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-[2px] bg-gradient-to-r from-[#D4500A]/30 to-[#D4500A]/10 z-0" />
+                                )}
+
+                                {/* Step Number */}
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#D4500A] flex items-center justify-center text-white font-bold text-sm sm:text-base mb-5 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-[#D4500A]/20">
+                                    {step.id}
+                                </div>
+
+                                <h4 className="text-lg sm:text-xl font-semibold text-[#2D3748] mb-3 leading-tight">
+                                    {step.title}
+                                </h4>
+
+                                <p className="text-[#718096] text-sm sm:text-base leading-relaxed flex-grow">
+                                    {step.desc}
+                                </p>
+                            </div>
                         </div>
-
-                        {/* Progress Node */}
-                        <div className="absolute top-[-6px] left-0 w-3 h-3 rounded-full bg-brand-red shadow-[0_0_15px_rgba(225,6,0,0.5)]" />
-
-                        <span className="text-brand-red font-bold text-xl mb-4">{step.id}</span>
-                        <h4 className="text-3xl font-black mb-4">{step.title}</h4>
-                        <p className="text-muted leading-relaxed text-lg">{step.desc}</p>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </section>
     );
