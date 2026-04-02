@@ -97,8 +97,8 @@ export function HeroSection() {
                                 Desarrollamos soluciones digitales, sistemas de venta y sitios web profesionales que conectan con tus clientes y multiplican tus ingresos. Hoy Mismo.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row xl:flex-row gap-2 sm:gap-3 items-center justify-start mt-5 sm:mt-8 w-full">
-                                <div className="hero-cta">
+                            <div className="flex flex-col sm:flex-row xl:flex-row gap-5 sm:gap-4 items-center justify-start mt-5 sm:mt-8 w-full">
+                                <div className="hero-cta mb-2 sm:mb-0">
                                     <Link href="/portafolio" className="btn-glow-uiverse text-lg shadow-2xl">
                                         <span className="btn-glow-inner">Ver Servicios</span>
                                     </Link>

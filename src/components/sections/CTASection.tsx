@@ -29,13 +29,41 @@ export function CTASection() {
         }
     }, { scope: sectionRef });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormStatus("submitting");
-        setTimeout(() => {
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            service: formData.get("service"),
+            message: formData.get("message"),
+        };
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error("Error en el envío");
+            }
+
             setFormStatus("success");
+            form.reset();
+
             setTimeout(() => setFormStatus("idle"), 5000);
-        }, 1500);
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setFormStatus("error");
+            setTimeout(() => setFormStatus("idle"), 5000);
+        }
     };
 
     return (
@@ -66,6 +94,7 @@ export function CTASection() {
                             <label htmlFor="name" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Nombre</label>
                             <input
                                 id="name"
+                                name="name"
                                 required
                                 type="text"
                                 className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all"
@@ -76,6 +105,7 @@ export function CTASection() {
                             <label htmlFor="email" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Email</label>
                             <input
                                 id="email"
+                                name="email"
                                 required
                                 type="email"
                                 className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all"
@@ -88,13 +118,14 @@ export function CTASection() {
                         <label htmlFor="service" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Servicio</label>
                         <select
                             id="service"
+                            name="service"
                             required
                             className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all appearance-none cursor-pointer"
                         >
-                            <option value="" className="text-gray-900">Selecciona un servicio</option>
-                            <option value="web" className="text-gray-900">Página Web Profesional</option>
-                            <option value="menu" className="text-gray-900">Menú Digital / Tienda</option>
-                            <option value="otro" className="text-gray-900">Otro</option>
+                            <option value="" className="bg-[#D4500A] text-white">Selecciona un servicio</option>
+                            <option value="web" className="bg-[#D4500A] text-white">Página Web Profesional</option>
+                            <option value="menu" className="bg-[#D4500A] text-white">Menú Digital / Tienda</option>
+                            <option value="otro" className="bg-[#D4500A] text-white">Otro</option>
                         </select>
                     </div>
 
@@ -102,24 +133,26 @@ export function CTASection() {
                         <label htmlFor="message" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Cuéntanos</label>
                         <textarea
                             id="message"
+                            name="message"
                             required
                             rows={3}
                             className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all resize-none"
-                            placeholder="De qué es tu negocio y qué te gustaría lograr..."
+                            defaultValue="Me gustaría cotizar precios para "
                         />
                     </div>
 
                     <button
                         type="submit"
-                        disabled={formStatus !== "idle"}
-                        className="btn-glow-uiverse w-full text-sm sm:text-base"
+                        disabled={formStatus !== "idle" && formStatus !== "error"}
+                        className="btn-glow-uiverse w-full text-sm sm:text-base text-white font-medium"
                     >
                         <span className="btn-glow-inner flex items-center justify-center gap-2">
                             {formStatus === "idle" && "Enviar Mensaje"}
+                            {formStatus === "error" && "Hubo un error. Reintentar"}
                             {formStatus === "submitting" && "Enviando..."}
-                            {formStatus === "success" && "¡Enviado!"}
+                            {formStatus === "success" && "¡Mensaje Enviado!"}
 
-                            {formStatus === "idle" && (
+                            {(formStatus === "idle" || formStatus === "error") && (
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>

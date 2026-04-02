@@ -22,44 +22,53 @@ export default async function ServicePage({ params }: PageProps) {
     return (
         <>
             <Header />
-            <main className="min-h-screen bg-black text-white w-full overflow-x-hidden">
+            <main className="min-h-screen bg-[#0A0A0E] text-white w-full overflow-x-hidden">
 
                 {/* SECCIÓN 1 – HERO DE SERVICIO */}
-                <section className="relative pt-40 md:pt-56 pb-24 md:pb-32 px-4 md:px-12 w-full">
-                    <div className="absolute inset-0 bg-gradient-to-b from-brand-red-dark/20 to-black z-0 pointer-events-none" />
-                    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-red opacity-20 blur-[150px] rounded-full z-0 pointer-events-none" />
+                <section className="relative pt-40 md:pt-56 pb-24 md:pb-32 px-4 md:px-12 w-full bg-[#D4500A] overflow-hidden rounded-b-[40px] md:rounded-b-[80px]">
+                    <div className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-0">
+                        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full blob-1 animate-blob-1" />
+                        <div className="absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full blob-2 animate-blob-2" />
+                        <div className="absolute top-[20%] left-[40%] w-[50%] h-[50%] rounded-full blob-3 animate-blob-3" />
+                    </div>
 
-                    <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
-                        <Link
-                            href="/#services"
-                            className="text-brand-red text-sm font-bold uppercase tracking-widest mb-8 inline-flex items-center hover:text-white transition-colors"
-                        >
-                            <span className="mr-2">←</span> Explorar otros servicios
-                        </Link>
+                    <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+                        <div className="w-full justify-start flex mb-8">
+                            <Link
+                                href="/"
+                                className="text-white text-xs sm:text-sm font-bold tracking-widest inline-flex items-center hover:text-white/80 transition-colors bg-white/10 px-5 py-2.5 rounded-full border border-white/20 backdrop-blur-md"
+                            >
+                                <span className="mr-2">←</span> Regresar al inicio
+                            </Link>
+                        </div>
+                        
+                        <div className="p-6 sm:p-12 rounded-[2rem] bg-white/10 backdrop-blur-3xl border border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.3)] text-center relative overflow-hidden w-full">
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+                            <div className="relative z-10">
+                                <h1 className="text-3xl md:text-5xl lg:text-[4.5rem] font-medium tracking-tight leading-[1.1] mb-6 drop-shadow-sm text-white">
+                                    {service.title}
+                                </h1>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight leading-[1.1] mb-8">
-                            {service.title}
-                        </h1>
+                                <p className="text-lg md:text-2xl font-bold text-white/90 mb-8 italic drop-shadow-md">
+                                    "{service.tagline}"
+                                </p>
 
-                        <p className="text-xl md:text-3xl font-bold text-brand-red mb-10 italic">
-                            "{service.tagline}"
-                        </p>
+                                <p className="text-sm sm:text-base md:text-xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto mb-10">
+                                    {service.heroDescription}
+                                </p>
 
-                        <p className="text-lg md:text-2xl text-white/80 font-medium leading-relaxed max-w-3xl mb-12">
-                            {service.heroDescription}
-                        </p>
-
-                        <Link
-                            href="#precios"
-                            className="px-10 py-5 bg-brand-red hover:bg-brand-red-dark text-white text-lg font-bold tracking-wide rounded-full transition-all duration-300 transform hover:scale-105 shadow-[0_0_30px_rgba(225,6,0,0.3)]"
-                        >
-                            Quiero esto para mi negocio →
-                        </Link>
+                                <div className="flex justify-center w-full">
+                                    <Link href="#precios" className="btn-glow-uiverse shadow-2xl">
+                                        <span className="btn-glow-inner w-full px-4 text-center">Ver paquetes</span>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 {/* SECCIÓN 2 – PROBLEMA QUE RESUELVE */}
-                <section className="py-24 bg-[#0a0a0f] border-t border-b border-white/5 px-4 md:px-12">
+                <section className="py-24 px-4 md:px-12">
                     <div className="max-w-7xl mx-auto">
                         <h2 className="text-sm font-bold tracking-[0.2em] text-muted uppercase mb-4 text-center">
                             ¿Tu negocio enfrenta estos retos?
@@ -70,10 +79,10 @@ export default async function ServicePage({ params }: PageProps) {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
                             {service.solutions.map((sol, idx) => (
-                                <div key={idx} className="bg-white/[0.02] border border-white/5 rounded-2xl p-8 hover:bg-white/[0.04] transition-colors">
+                                <div key={idx} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
                                     <div className="text-5xl mb-6">{sol.icon}</div>
                                     <h4 className="text-2xl font-bold mb-4">{sol.title}</h4>
-                                    <p className="text-muted leading-relaxed text-lg">{sol.description}</p>
+                                    <p className="text-white/80 leading-relaxed text-lg">{sol.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -105,7 +114,7 @@ export default async function ServicePage({ params }: PageProps) {
                 </section>
 
                 {/* SECCIÓN 4 & 5 – IDEAL PARA Y ENTREGABLES */}
-                <section className="py-24 bg-[#0a0a0f] px-4 md:px-12">
+                <section className="py-24 px-4 md:px-12">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
 
                         {/* Ideal Para */}
@@ -115,9 +124,9 @@ export default async function ServicePage({ params }: PageProps) {
                             </h3>
                             <div className="flex flex-col gap-4">
                                 {service.idealFor.map((profile, idx) => (
-                                    <div key={idx} className="bg-black border border-white/10 rounded-xl p-6 flex items-center gap-4">
-                                        <div className="w-2 h-2 rounded-full bg-white/30" />
-                                        <span className="text-lg font-medium">{profile}</span>
+                                    <div key={idx} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 flex items-center gap-4">
+                                        <div className="w-2 h-2 rounded-full bg-white/50 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                                        <span className="text-lg font-medium text-white/90">{profile}</span>
                                     </div>
                                 ))}
                             </div>
@@ -155,14 +164,14 @@ export default async function ServicePage({ params }: PageProps) {
                             <div
                                 key={idx}
                                 className={cn(
-                                    "relative bg-white/[0.02] rounded-3xl p-8 flex flex-col items-center justify-start text-center border transition-all duration-300",
+                                    "relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 flex flex-col items-center justify-start text-center border transition-all duration-300",
                                     plan.highlighted
-                                        ? "border-brand-red scale-100 md:scale-105 z-10 bg-gradient-to-b from-brand-red/10 to-transparent shadow-[0_0_40px_rgba(225,6,0,0.15)]"
-                                        : "border-white/10 hover:border-white/30"
+                                        ? "border-[#FF8C3A] scale-100 md:scale-105 z-10 bg-gradient-to-b from-[#FF8C3A]/20 to-transparent shadow-[0_0_40px_rgba(255,140,58,0.2)]"
+                                        : "border-white/20 hover:border-white/40"
                                 )}
                             >
                                 {plan.highlighted && (
-                                    <div className="absolute -top-4 bg-brand-red text-white text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full">
+                                    <div className="absolute -top-4 bg-gradient-to-r from-[#FF9F0A] to-[#D4500A] text-white text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
                                         Más Popular
                                     </div>
                                 )}
@@ -187,8 +196,8 @@ export default async function ServicePage({ params }: PageProps) {
                                     className={cn(
                                         "w-full py-4 rounded-full font-bold tracking-wide transition-all mt-auto",
                                         plan.highlighted
-                                            ? "bg-brand-red hover:bg-brand-red-dark text-white"
-                                            : "bg-white/10 hover:bg-white/20 text-white"
+                                            ? "bg-gradient-to-r from-[#FF9F0A] to-[#D4500A] hover:opacity-90 text-white shadow-xl"
+                                            : "bg-white/10 hover:bg-white/20 text-white backdrop-blur-md"
                                     )}
                                 >
                                     Agendar consulta →
@@ -199,8 +208,8 @@ export default async function ServicePage({ params }: PageProps) {
                 </section>
 
                 {/* SECCIÓN 7 – CTA FINAL */}
-                <section className="py-32 px-4 text-center mt-auto border-t border-brand-red/20 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-red-dark/30 to-black z-0" />
+                <section className="py-32 px-4 text-center mt-auto border-t border-[#FF8C3A]/20 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#7A2000]/40 to-transparent z-0" />
 
                     <div className="relative z-10 max-w-3xl mx-auto">
                         <h2 className="text-4xl md:text-6xl font-black mb-8 text-white">

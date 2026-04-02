@@ -66,14 +66,7 @@ export function PortfolioSection({ variant = 'carousel' }: PortfolioSectionProps
                 ease: "power3.out",
             });
 
-            if (variant === 'carousel' && marqueeRef.current) {
-                gsap.to(marqueeRef.current, {
-                    xPercent: -50,
-                    duration: 40,
-                    ease: "none",
-                    repeat: -1,
-                });
-            }
+            // GSAP marquee removed for native horizontal scrolling
         }
     }, { scope: sectionRef, dependencies: [variant] });
 
@@ -105,21 +98,23 @@ export function PortfolioSection({ variant = 'carousel' }: PortfolioSectionProps
             </div>
 
             {variant === 'carousel' ? (
-                <div className="relative w-full overflow-hidden flex items-center">
-                    {/* Fade edges matching section bg */}
-                    <div className="absolute inset-y-0 left-0 w-8 sm:w-24 bg-gradient-to-r from-[#D4500A] to-transparent z-20 pointer-events-none" />
-                    <div className="absolute inset-y-0 right-0 w-8 sm:w-24 bg-gradient-to-l from-[#D4500A] to-transparent z-20 pointer-events-none" />
+                <div className="relative w-full flex items-center">
+                    {/* Fade edges matching section bg pointer events none to allow scrolling underneath */}
+                    <div className="absolute inset-y-0 left-0 w-4 sm:w-16 bg-gradient-to-r from-[#D4500A] to-transparent z-20 pointer-events-none" />
+                    <div className="absolute inset-y-0 right-0 w-4 sm:w-16 bg-gradient-to-l from-[#D4500A] to-transparent z-20 pointer-events-none" />
 
                     <div
                         ref={marqueeRef}
-                        className="flex w-max gap-4 sm:gap-6 md:gap-8 px-4 py-4"
+                        className="flex w-full gap-4 sm:gap-6 md:gap-8 px-6 sm:px-16 py-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar"
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
-                        {[...projects, ...projects].map((project, index) => (
-                            <ProjectCard
-                                key={`${project.id}-carousel-${index}`}
-                                project={project}
-                                className="w-[260px] sm:w-[340px] md:w-[500px] shrink-0"
-                            />
+                        {projects.map((project, index) => (
+                            <div key={`${project.id}-carousel-${index}`} className="snap-center shrink-0">
+                                <ProjectCard
+                                    project={project}
+                                    className="w-[280px] sm:w-[340px] md:w-[500px]"
+                                />
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -140,7 +135,7 @@ function ProjectCard({ project, className }: { project: any; className?: string 
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group block relative aspect-[16/10] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-white/10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_6px_rgba(255,255,255,0.15)] transition-all duration-500 hover:border-white/40 hover:shadow-[0_16px_48px_0_rgba(0,0,0,0.15)] ${className || ""}`}
+            className={`group block relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_6px_rgba(255,255,255,0.15)] transition-all duration-500 hover:border-white/40 hover:shadow-[0_16px_48px_0_rgba(0,0,0,0.15)] ${className || ""}`}
         >
             {project.image && (
                 <Image

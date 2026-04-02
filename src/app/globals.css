@@ -41,14 +41,21 @@ body {
 /* From Uiverse.io Glow Button - Fixed Stacking Context */ 
 .btn-glow-uiverse {
   position: relative;
-  width: 180px;
-  height: 54px;
+  width: 140px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   cursor: pointer;
   z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .btn-glow-uiverse {
+    width: 180px;
+    height: 54px;
+  }
 }
 
 .btn-glow-uiverse.w-full {
@@ -66,7 +73,14 @@ body {
   border-radius: 8px;
   z-index: 2;
   font-weight: 600;
+  font-size: 0.875rem;
   pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .btn-glow-inner {
+    font-size: 1.125rem;
+  }
 }
 
 .btn-glow-uiverse::before {
