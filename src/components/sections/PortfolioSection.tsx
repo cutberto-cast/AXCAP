@@ -1,171 +1,209 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
+// Definición de datos de proyectos estáticos
+const showcaseProjects = [
     {
-        id: 1,
-        title: "Cafecito Shop",
-        category: "E-Commerce",
-        tech: ["Next.js", "Tailwind"],
-        image: "/image/cafecito.png",
-        url: "https://cafecito.shop"
+        id: "formed-wood",
+        title: "Formed Wood",
+        categoryGroup: "Páginas Web",
+        category: "E-Commerce / Branding",
+        tech: ["Next.js", "Tailwind", "Vercel"],
+        // TODO: Asegúrate de reemplazar esta ruta en cuanto agregues la imagen original a public/image
+        images: ["/image/cafecito.png"],
+        shortDescription: "Plataforma inmersiva diseñada para maximizar el tiempo de retención y la conversión de clientes premium. Cuenta con una arquitectura ultrarrápida que minimiza la tasa de rebote desde el primer segundo de carga.",
+        features: ["Carga sub-segundo", "Optimización SEO Técnica", "Catálogo ágil"],
+        url: "https://formed-wood.vercel.app/"
     },
     {
-        id: 2,
+        id: "clinica-dental",
         title: "Clínica Dental",
-        category: "Landing Page",
-        tech: ["Next.js", "React"],
-        image: "/image/dental-clinic.png",
+        categoryGroup: "Páginas Web",
+        category: "Landing Page Corporativa",
+        tech: ["Next.js", "React", "Tailwind"],
+        images: ["/image/dental-clinic.png"],
+        shortDescription: "Un embudo de ventas digital disfrazado de sitio web elegante. Cada sección está estructurada para fomentar confianza instantánea, impulsando llamados a la acción claros que multiplican orgánicamente las citas mensuales.",
+        features: ["Integración de contacto directo", "Estética de alta confianza local", "Conversión dirigida"],
         url: "https://clinica-dental-landing-one.vercel.app/"
     },
     {
-        id: 3,
+        id: "black-ritual",
         title: "Black Ritual Studio",
-        category: "Tattoo Studio",
+        categoryGroup: "Páginas Web",
+        category: "Portafolio Híbrido",
         tech: ["Next.js", "Tailwind"],
-        image: "/image/studio-tattoo.png",
+        images: ["/image/studio-tattoo.png"],
+        shortDescription: "Galería de altísimo impacto visual para estudio de tatuajes. Se construyó en dark-mode para proyectar la estética de marca, atrapando visualmente al prospecto y guiándolo eficientemente a la reservación.",
+        features: ["Visor inmersivo", "Flujo de conversión corto", "Dark Mode UI premium"],
         url: "https://nocturne-tattoo.vercel.app/"
     },
     {
-        id: 4,
+        id: "admin-cafe",
         title: "Admin Cafetería",
-        category: "Panel de Control",
-        tech: ["Next.js", "Tailwind"],
-        image: "/image/admin-cafe.png",
+        categoryGroup: "Sistemas de Gestión",
+        category: "Panel de Control Inteligente",
+        tech: ["Next.js", "PostgreSQL", "Tailwind"],
+        images: ["/image/admin-cafe.png"],
+        shortDescription: "Sistema centralizado de administración, inventario y finanzas en tiempo real. Diseñado para aplastar el margen de error humano en cortes de caja, automatizando tareas pesadas para devolver decenas de horas productivas.",
+        features: ["Monitoreo en tiempo real", "Métricas de negocio integradas", "Punto de Venta Web"],
     }
 ];
 
-interface PortfolioSectionProps {
-    variant?: 'carousel' | 'grid';
-}
-
-export function PortfolioSection({ variant = 'carousel' }: PortfolioSectionProps) {
+export function PortfolioSection() {
     const sectionRef = useRef<HTMLElement>(null);
-    const marqueeRef = useRef<HTMLDivElement>(null);
 
-    useGSAP(() => {
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        if (!prefersReducedMotion && sectionRef.current) {
-            gsap.from(".portfolio-header", {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                },
-                y: 40,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-            });
-
-            // GSAP marquee removed for native horizontal scrolling
-        }
-    }, { scope: sectionRef, dependencies: [variant] });
+    // Obtenemos los grupos únicos
+    const groups = Array.from(new Set(showcaseProjects.map(p => p.categoryGroup)));
 
     return (
-        <section id="portfolio" ref={sectionRef} className="py-20 bg-[#D4500A] relative w-full overflow-hidden">
-            {/* Background Blobs */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none opacity-50">
-                <div className="absolute bottom-[-20%] right-[-5%] w-[45%] h-[45%] rounded-full bg-[#FF8C3A] blur-[80px]" />
-                <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-[#7A2000] blur-[80px]" />
+        <section id="portfolio" ref={sectionRef} className="py-24 bg-[#D4500A] relative w-full overflow-hidden">
+            {/* Background Blobs for consistency if needed, but keeping it simpler to match hero transition */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+                <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-[#FF8C3A] blur-[100px]" />
+                <div className="absolute top-[10%] left-[-10%] w-[35%] h-[35%] rounded-full bg-black/20 blur-[100px]" />
             </div>
 
-            <div className="portfolio-header max-w-6xl mx-auto mb-10 sm:mb-14 px-4 sm:px-6 md:px-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative z-20">
-                <div>
-                    <h2 className="text-xs sm:text-sm font-bold tracking-[0.2em] text-white/70 uppercase mb-3">
+            <div className="max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-6 md:px-12 lg:px-20 relative z-20">
+
+                <div className="mb-6">
+                    <h2 className="text-xs sm:text-sm font-bold tracking-[0.2em] text-white/80 uppercase mb-3 drop-shadow-sm">
                         Casos de Éxito
                     </h2>
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-medium text-white max-w-xl leading-[1.15] tracking-tight">
-                        Trabajo que define estándares.
-                    </h3>
+
                 </div>
-                {variant === 'carousel' && (
-                    <Link href="/portafolio" className="group px-6 py-3 bg-white/15 backdrop-blur-xl border border-white/30 text-white font-semibold tracking-wide rounded-full transition-all duration-300 hover:bg-white/25 hover:border-white/50 shadow-[0_4px_16px_rgba(0,0,0,0.08)] flex items-center justify-center gap-2 text-sm shrink-0">
-                        Ver Todo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </Link>
-                )}
-            </div>
 
-            {variant === 'carousel' ? (
-                <div className="relative w-full flex items-center">
-                    {/* Fade edges matching section bg pointer events none to allow scrolling underneath */}
-                    <div className="absolute inset-y-0 left-0 w-4 sm:w-16 bg-gradient-to-r from-[#D4500A] to-transparent z-20 pointer-events-none" />
-                    <div className="absolute inset-y-0 right-0 w-4 sm:w-16 bg-gradient-to-l from-[#D4500A] to-transparent z-20 pointer-events-none" />
+                <div className="flex flex-col gap-24">
+                    {groups.map((groupTitle) => {
+                        const projectsInGroup = showcaseProjects.filter(p => p.categoryGroup === groupTitle);
 
-                    <div
-                        ref={marqueeRef}
-                        className="flex w-full gap-4 sm:gap-6 md:gap-8 px-6 sm:px-16 py-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar"
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                    >
-                        {projects.map((project, index) => (
-                            <div key={`${project.id}-carousel-${index}`} className="snap-center shrink-0">
-                                <ProjectCard
-                                    project={project}
-                                    className="w-[280px] sm:w-[340px] md:w-[500px]"
-                                />
+                        return (
+                            <div key={groupTitle} className="flex flex-col">
+                                {/* Group Title / Disociación visual */}
+                                <div className="flex items-center gap-6 mb-10 opacity-90">
+                                    <h4 className="text-2xl md:text-3xl font-semibold text-white uppercase tracking-tight">
+                                        {groupTitle}
+                                    </h4>
+                                    <div className="flex-1 h-[1px] bg-gradient-to-r from-white/30 to-transparent" />
+                                </div>
+
+                                <div className="flex flex-col gap-16">
+                                    {projectsInGroup.map((project) => (
+                                        <ProjectShowcase key={project.id} project={project} />
+                                    ))}
+                                </div>
                             </div>
-                        ))}
-                    </div>
+                        );
+                    })}
                 </div>
-            ) : (
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 relative z-20">
-                    {projects.map((project) => (
-                        <ProjectCard key={project.id} project={project} className="w-full" />
-                    ))}
-                </div>
-            )}
+            </div>
         </section>
     );
 }
 
-function ProjectCard({ project, className }: { project: any; className?: string }) {
+function ProjectShowcase({ project }: { project: typeof showcaseProjects[0] }) {
+    const [currentImg, setCurrentImg] = useState(0);
+
+    const nextImg = () => setCurrentImg((prev) => (prev + 1) % project.images.length);
+    const prevImg = () => setCurrentImg((prev) => (prev - 1 + project.images.length) % project.images.length);
+
     return (
-        <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`group block relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_6px_rgba(255,255,255,0.15)] transition-all duration-500 hover:border-white/40 hover:shadow-[0_16px_48px_0_rgba(0,0,0,0.15)] ${className || ""}`}
-        >
-            {project.image && (
-                <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    unoptimized
-                />
-            )}
+        <div className="flex flex-col lg:flex-row items-center gap-6 xl:gap-10 w-full p-5 sm:p-6 lg:p-8 rounded-[2rem] bg-white/5 backdrop-blur-2xl border border-white/20 shadow-[0_16px_40px_0_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.1)] transition-transform duration-500 hover:bg-white/10">
 
-            {/* Bottom gradient overlay for readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+            {/* Izquierda: Carrusel Estático de Imágenes */}
+            <div className="w-full lg:w-1/2 xl:w-[45%] shrink-0">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-black/40 border border-white/10 group shadow-inner">
+                    <Image
+                        src={project.images[currentImg]}
+                        alt={`Captura interface ${project.title}`}
+                        fill
+                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+                        unoptimized
+                    />
 
-            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end text-left">
-                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/80 font-bold mb-1">
-                    {project.category}
-                </span>
-                <h4 className="text-lg sm:text-2xl md:text-3xl font-semibold text-white mb-2 drop-shadow-md">
-                    {project.title}
-                </h4>
+                    {/* Dark gradient overlap at bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
 
-                <ul className="flex flex-wrap gap-1.5 sm:gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-3 group-hover:translate-y-0">
-                    {project.tech.map((tech: string) => (
-                        <li key={tech} className="text-[10px] sm:text-xs font-medium bg-white/15 backdrop-blur-md border border-white/25 px-3 py-1 rounded-full text-white">
-                            {tech}
-                        </li>
-                    ))}
-                </ul>
+                    {/* Controles del Carrusel (Solo visibles si en el futuro agregas > 1 imagen) */}
+                    {project.images.length > 1 && (
+                        <>
+                            <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xl hover:bg-black/80 hover:scale-110 active:scale-95 duration-200">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+                            </button>
+                            <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xl hover:bg-black/80 hover:scale-110 active:scale-95 duration-200">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                            </button>
+
+                            {/* Paginación */}
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                {project.images.map((_, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentImg ? "bg-white w-5" : "bg-white/40"}`}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
-        </a>
+
+            {/* Derecha: Descripción Analítica */}
+            <div className="w-full lg:w-1/2 xl:w-[55%] flex flex-col justify-center">
+                
+                {/* Header (Título y Categoría inline) */}
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <h3 className="text-2xl lg:text-3xl font-semibold text-white tracking-tight">
+                        {project.title}
+                    </h3>
+                    <div className="px-3 py-1 rounded-md bg-[#dd5c1c]/90 border border-white/20 text-white text-[10px] font-bold tracking-[0.15em] uppercase shadow-sm">
+                        {project.category}
+                    </div>
+                </div>
+                
+                <p className="text-white/85 font-light text-sm md:text-base mb-6 leading-relaxed">
+                    {project.shortDescription}
+                </p>
+
+                <div className="mb-6">
+                    <h4 className="text-xs font-bold text-white/70 mb-4 tracking-[0.15em] uppercase">Puntos de Valor</h4>
+                    <ul className="flex flex-col gap-3">
+                        {project.features.map(feat => (
+                            <li key={feat} className="flex items-center text-white/90 font-medium text-sm md:text-base">
+                                <span className="mr-3 text-[#111827] bg-white rounded-full p-0.5 shadow-sm">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                {feat}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Footer de Tarjeta Integrado */}
+                <div className="flex flex-wrap items-center justify-between gap-4 mt-2">
+                    {project.url ? (
+                        <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2.5 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-all shadow-[0_4px_16px_rgba(255,255,255,0.1)] active:scale-[0.98] text-[13px] md:text-sm"
+                        >
+                            Ver Proyecto
+                        </a>
+                    ) : (
+                        <span className="text-white/40 italic text-xs md:text-sm">Proyecto Interno / En Desarrollo</span>
+                    )}
+
+                    <div className="flex flex-wrap gap-2">
+                        {project.tech.map((tech) => (
+                            <span key={tech} className="text-[10px] md:text-xs font-medium tracking-wide px-3 py-1.5 rounded-lg bg-black/30 text-white/80 border border-white/10 backdrop-blur-md">
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

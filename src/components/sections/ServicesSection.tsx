@@ -4,64 +4,62 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, CheckCircle2, Globe, LayoutDashboard, Rocket } from "lucide-react";
+import {
+    ArrowRight,
+    CheckCircle2,
+    Globe,
+    MonitorSmartphone,
+    Rocket,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
     {
         id: 1,
-        icon: Globe,
-        title: "Páginas web que sí generan clientes",
-        badge: "Más solicitado",
+        title: "Sistema digital para tu negocio",
         description:
-            "Diseñadas para causar una gran primera impresión, transmitir confianza y convertir visitas en mensajes o ventas.",
-        includes: [
-            "Diseño premium y responsive",
-            "Copy estratégico orientado a conversión",
-            "WhatsApp, formularios y CTAs visibles",
-            "Optimización de velocidad y mobile",
+            "Integra gestión, página web y menú o catálogo digital en una sola solución para vender mejor y operar con más orden.",
+        points: [
+            "Sistema + web + menú/catálogo",
+            "WhatsApp, pedidos o citas integrados",
+            "Ideal para negocios que quieren crecer",
         ],
-        result: "Tu negocio se ve profesional y listo para vender.",
+        buttonLabel: "Quiero este servicio",
         whatsappNumber: "5210000000000",
         whatsappMessage:
-            "Hola, quiero una página web profesional para mi negocio. Me interesa recibir una cotización.",
+            "Hola, me interesa el sistema digital con página web y menú o catálogo para mi negocio. Quiero más información.",
+        featured: true,
     },
     {
         id: 2,
-        icon: LayoutDashboard,
-        title: "Landing pages para campañas y promociones",
-        badge: "Alta conversión",
+        title: "Página web para atraer clientes",
         description:
-            "Perfectas para anuncios, lanzamientos o promociones específicas. Menos distracción, más conversiones.",
-        includes: [
-            "Estructura enfocada en resultados",
-            "Secciones persuasivas y CTA directo",
-            "Integración con WhatsApp o formularios",
-            "Ideal para campañas en Facebook/Instagram",
+            "Una web profesional pensada para transmitir confianza, mostrar tus servicios y convertir visitas en mensajes o ventas.",
+        points: [
+            "Diseño moderno y responsive",
+            "Enfoque en conversión",
+            "WhatsApp y formularios visibles",
         ],
-        result: "Más mensajes, más leads, más oportunidades de venta.",
+        buttonLabel: "Cotizar página web",
         whatsappNumber: "5210000000000",
         whatsappMessage:
-            "Hola, quiero una landing page para promocionar un servicio o campaña. Me gustaría cotizar.",
+            "Hola, quiero una página web profesional para mi negocio. Me gustaría cotizar.",
     },
     {
         id: 3,
-        icon: Rocket,
-        title: "Optimización y rediseño de sitios web",
-        badge: "Mejora inmediata",
+        title: "Rediseño y optimización web",
         description:
-            "Si tu web se ve vieja, lenta o no convierte, la renovamos para que se vea actual, clara y lista para vender.",
-        includes: [
-            "Rediseño visual y mejor UX",
-            "Mejora de velocidad y estructura",
-            "Reordenamiento de contenido",
-            "Enfoque en confianza y conversión",
+            "Si tu sitio se ve antiguo, lento o no convence, lo renovamos para que se vea mejor y funcione a favor de tu negocio.",
+        points: [
+            "Mejor diseño y estructura",
+            "Optimización mobile y velocidad",
+            "Más claridad y mejor impacto",
         ],
-        result: "Convierte una web que estorba en una web que ayuda a vender.",
+        buttonLabel: "Mejorar mi sitio",
         whatsappNumber: "5210000000000",
         whatsappMessage:
-            "Hola, quiero mejorar o rediseñar mi página web actual. ¿Me pueden cotizar?",
+            "Hola, quiero mejorar o rediseñar mi página web actual. Me interesa una cotización.",
     },
 ];
 
@@ -77,7 +75,7 @@ export function ServicesSection() {
             if (!prefersReducedMotion) {
                 gsap.fromTo(
                     ".services-header",
-                    { y: 40, opacity: 0 },
+                    { y: 32, opacity: 0 },
                     {
                         scrollTrigger: {
                             trigger: containerRef.current,
@@ -85,23 +83,23 @@ export function ServicesSection() {
                         },
                         y: 0,
                         opacity: 1,
-                        duration: 0.9,
+                        duration: 0.8,
                         ease: "power3.out",
                     }
                 );
 
                 gsap.fromTo(
-                    ".service-card",
-                    { y: 40, opacity: 0 },
+                    ".service-row",
+                    { y: 28, opacity: 0 },
                     {
                         scrollTrigger: {
-                            trigger: ".services-grid",
-                            start: "top 85%",
+                            trigger: ".services-list",
+                            start: "top 88%",
                         },
                         y: 0,
                         opacity: 1,
-                        duration: 0.75,
-                        stagger: 0.12,
+                        duration: 0.65,
+                        stagger: 0.1,
                         ease: "power3.out",
                     }
                 );
@@ -116,34 +114,23 @@ export function ServicesSection() {
             ref={containerRef}
             className="relative z-10 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-20 md:px-10 lg:px-12"
         >
-            {/* Background decor */}
+            {/* Background accents */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-[#D4500A]/[0.05] blur-3xl" />
-                <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-[#D4500A]/[0.04] blur-3xl" />
+                <div className="absolute bottom-0 right-0 h-52 w-52 rounded-full bg-[#D4500A]/[0.04] blur-3xl" />
             </div>
 
-            <div className="relative z-10 mx-auto max-w-7xl">
+            <div className="relative z-10 mx-auto max-w-6xl">
                 {/* Header */}
-                <div className="services-header mx-auto mb-10 max-w-3xl text-center sm:mb-14 md:mb-16">
-                    <p className="mb-3 inline-flex items-center rounded-full border border-[#D4500A]/15 bg-[#FFF7F2] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#D4500A] sm:text-xs">
-                        Servicios diseñados para vender
-                    </p>
-
-                    <h2 className="text-3xl font-semibold leading-tight tracking-tight text-[#1F2937] sm:text-4xl md:text-5xl">
-                        No solo hacemos páginas web.
-                        <span className="block text-[#D4500A]">Creamos herramientas para atraer clientes.</span>
+                <div className="services-header mx-auto mb-8 text-center sm:mb-10 md:mb-12">
+                    <h2 className="w-full text-base font-semibold leading-tight tracking-tight text-[#D4500A] sm:text-lg md:text-xl">
+                        Desde una página web profesional hasta una solución más completa con sistema, menú o catálogo digital para tu negocio.
                     </h2>
-
-                    <p className="mt-4 text-sm leading-relaxed text-[#6B7280] sm:mt-5 sm:text-base md:text-lg">
-                        Cada servicio está pensado para ayudarte a verte profesional,
-                        generar confianza y convertir visitas en mensajes, citas o ventas.
-                    </p>
                 </div>
 
-                {/* Grid */}
-                <div className="services-grid grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {/* Compact services list */}
+                <div className="services-list space-y-4">
                     {services.map((service) => {
-                        const Icon = service.icon;
                         const whatsappLink = `https://wa.me/${service.whatsappNumber}?text=${encodeURIComponent(
                             service.whatsappMessage
                         )}`;
@@ -151,101 +138,86 @@ export function ServicesSection() {
                         return (
                             <article
                                 key={service.id}
-                                className="service-card group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-black/6 bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-1 hover:border-[#D4500A]/20 hover:shadow-[0_20px_60px_rgba(212,80,10,0.08)] sm:p-6"
+                                className={`service-row group relative overflow-hidden rounded-[1.5rem] border p-4 sm:p-5 md:p-6 transition-all duration-300 ${service.featured
+                                    ? "border-[#D4500A]/15 bg-gradient-to-r from-[#FFF8F3] via-white to-[#FFFDFB] shadow-[0_12px_40px_rgba(212,80,10,0.06)]"
+                                    : "border-black/6 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-[#D4500A]/15"
+                                    }`}
                             >
-                                {/* Top Accent */}
-                                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#D4500A] via-[#F97316] to-[#D4500A]" />
+                                <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.3fr_0.9fr_0.8fr] lg:items-center">
+                                    {/* Left */}
+                                    <div className="min-w-0">
+                                        <h3 className="text-lg font-bold leading-tight text-[#1F2937] sm:text-xl md:text-2xl">
+                                            {service.title}
+                                        </h3>
 
-                                {/* Icon + Badge */}
-                                <div className="mb-5 flex items-start justify-between gap-3">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF7F2] text-[#D4500A] ring-1 ring-[#D4500A]/10">
-                                        <Icon className="h-6 w-6" />
+                                        <p className="mt-2 text-sm leading-relaxed text-[#6B7280] sm:text-[15px]">
+                                            {service.description}
+                                        </p>
                                     </div>
 
-                                    <span className="rounded-full border border-[#D4500A]/10 bg-[#FFF8F3] px-3 py-1 text-[11px] font-semibold text-[#D4500A] sm:text-xs">
-                                        {service.badge}
-                                    </span>
-                                </div>
+                                    {/* Middle */}
+                                    <div className="rounded-2xl bg-[#FAFAFA] p-4">
+                                        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#D4500A] sm:text-xs">
+                                            Incluye
+                                        </p>
 
-                                {/* Title */}
-                                <h3 className="text-xl font-bold leading-tight text-[#1F2937] sm:text-2xl">
-                                    {service.title}
-                                </h3>
+                                        <ul className="space-y-2">
+                                            {service.points.map((item, index) => (
+                                                <li
+                                                    key={index}
+                                                    className="flex items-start gap-2 text-sm text-[#374151]"
+                                                >
+                                                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4500A]" />
+                                                    <span className="leading-snug">{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
 
-                                {/* Description */}
-                                <p className="mt-3 text-sm leading-relaxed text-[#6B7280] sm:text-[15px]">
-                                    {service.description}
-                                </p>
+                                    {/* Right */}
+                                    <div className="flex flex-col gap-3">
+                                        <a
+                                            href={whatsappLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`group/btn inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300 sm:text-base ${service.featured
+                                                ? "bg-[#D4500A] text-white hover:bg-[#B84308]"
+                                                : "bg-[#1F2937] text-white hover:bg-[#111827]"
+                                                }`}
+                                        >
+                                            {service.buttonLabel}
+                                            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                        </a>
 
-                                {/* Includes */}
-                                <div className="mt-6 rounded-3xl border border-black/5 bg-[#FAFAFA] p-4">
-                                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#D4500A] sm:text-xs">
-                                        Qué incluye
-                                    </p>
-
-                                    <ul className="space-y-2.5">
-                                        {service.includes.map((item, index) => (
-                                            <li
-                                                key={index}
-                                                className="flex items-start gap-2.5 text-sm text-[#374151]"
-                                            >
-                                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4500A]" />
-                                                <span className="leading-snug">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                {/* Result */}
-                                <div className="mt-5 rounded-2xl bg-[#FFF8F3] px-4 py-3">
-                                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#D4500A]">
-                                        Resultado
-                                    </p>
-                                    <p className="mt-1 text-sm font-medium leading-relaxed text-[#2D3748]">
-                                        {service.result}
-                                    </p>
-                                </div>
-
-                                {/* CTA */}
-                                <div className="mt-6 flex flex-col gap-3 pt-1">
-                                    <a
-                                        href={whatsappLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#D4500A] px-5 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#B84308] sm:text-base"
-                                    >
-                                        Quiero cotizar este servicio
-                                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                                    </a>
-
-                                    <p className="text-center text-xs leading-relaxed text-[#9CA3AF]">
-                                        Respuesta rápida por WhatsApp • Sin compromiso
-                                    </p>
+                                        <p className="text-center text-xs leading-relaxed text-[#9CA3AF]">
+                                            Respuesta rápida • Sin compromiso
+                                        </p>
+                                    </div>
                                 </div>
                             </article>
                         );
                     })}
                 </div>
 
-                {/* Bottom trust strip */}
-                <div className="mt-10 rounded-[1.75rem] border border-[#D4500A]/10 bg-[#FFF8F3] p-5 sm:mt-12 sm:p-6">
-                    <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+                {/* Bottom CTA */}
+                <div className="mt-8 rounded-[1.5rem] border border-[#D4500A]/10 bg-[#FFF8F3] p-4 sm:mt-10 sm:p-5">
+                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                         <div>
                             <p className="text-sm font-semibold text-[#1F2937] sm:text-base">
-                                ¿No sabes qué tipo de página necesita tu negocio?
+                                ¿No sabes cuál opción es la ideal para tu negocio?
                             </p>
                             <p className="mt-1 text-sm text-[#6B7280]">
-                                Te orientamos según tu objetivo: vender, captar clientes o mejorar tu presencia digital.
+                                Te orientamos según tu giro, tus objetivos y lo que realmente necesitas.
                             </p>
                         </div>
 
                         <a
                             href={`https://wa.me/5210000000000?text=${encodeURIComponent(
-                                "Hola, quiero que me orienten sobre qué tipo de página web necesita mi negocio."
+                                "Hola, quiero que me orienten sobre cuál servicio es el más adecuado para mi negocio."
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex shrink-0 items-center gap-2 rounded-2xl border border-[#D4500A]/15 bg-white px-5 py-3 text-sm font-semibold text-[#D4500A] transition-all duration-300 hover:border-[#D4500A]/30 hover:bg-[#FFFDFB]"
+                            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-[#D4500A]/15 bg-white px-5 py-3 text-sm font-semibold text-[#D4500A] transition-all duration-300 hover:border-[#D4500A]/30 hover:bg-[#FFFDFB]"
                         >
                             Ayúdenme a elegir
                             <ArrowRight className="h-4 w-4" />
