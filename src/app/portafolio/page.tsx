@@ -18,7 +18,7 @@ export default function PortafolioPage() {
                 <span className="mr-2">&larr;</span> Volver al inicio
             </Link>
         </div>
-        <PortfolioSection variant="grid" />
+        <PortfolioSection />
       </main>
       <Footer />
     </>
