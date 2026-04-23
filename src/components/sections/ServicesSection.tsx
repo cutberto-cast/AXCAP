@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { QuoteWizard } from "@/components/QuoteWizard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,6 +60,7 @@ const services = [
 
 export function ServicesSection() {
     const containerRef = useRef<HTMLElement>(null);
+    const [wizardOpen, setWizardOpen] = useState(false);
 
     useGSAP(
         () => {
@@ -205,17 +207,14 @@ export function ServicesSection() {
                             </p>
                         </div>
 
-                        <a
-                            href={`https://wa.me/5210000000000?text=${encodeURIComponent(
-                                "Hola, quiero que me orienten sobre cuál servicio es el más adecuado para mi negocio."
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={() => setWizardOpen(true)}
                             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-[#D4500A]/15 bg-white px-5 py-3 text-sm font-semibold text-[#D4500A] transition-all duration-300 hover:border-[#D4500A]/30 hover:bg-[#FFFDFB]"
                         >
                             Ayúdenme a elegir
                             <ArrowRight className="h-4 w-4" />
-                        </a>
+                        </button>
+                        <QuoteWizard isOpen={wizardOpen} onClose={() => setWizardOpen(false)} />
                     </div>
                 </div>
             </div>

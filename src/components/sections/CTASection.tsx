@@ -74,21 +74,21 @@ export function CTASection() {
                 <div className="absolute bottom-[-10%] right-[-10%] w-[55%] h-[55%] rounded-full bg-[#7A2000] blur-[80px]" />
             </div>
 
-            <div className="max-w-5xl mx-auto flex flex-col items-center relative z-20">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:gap-12 gap-10 relative z-20">
 
-                <div className="text-center mb-10 sm:mb-14 cta-content">
+                <div className="text-center md:text-left md:flex-1 md:shrink-0 cta-content">
                     <h2 className="text-xs sm:text-sm font-bold tracking-[0.2em] text-white/70 uppercase mb-3">
                         ¿Listo para empezar?
                     </h2>
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.15] tracking-tight mb-5">
+                    <h3 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-medium text-white leading-[1.15] tracking-tight mb-5">
                         Llevemos tu negocio a internet.
                     </h3>
-                    <p className="text-white/80 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed font-light">
+                    <p className="text-white/80 text-sm sm:text-base md:text-base max-w-xl md:mx-0 mx-auto leading-relaxed font-light">
                         Completa el formulario y te contactaremos en menos de 24 horas para platicar de tu negocio.
                     </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="w-full max-w-xl cta-content p-6 sm:p-8 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_6px_rgba(255,255,255,0.2)]">
+                <form onSubmit={handleSubmit} className="w-full md:w-auto md:flex-1 md:max-w-lg cta-content p-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_6px_rgba(255,255,255,0.2)]">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-5">
                         <div className="flex flex-col gap-1.5">
                             <label htmlFor="name" className="text-xs sm:text-sm font-semibold text-white/80 tracking-wide">Nombre</label>

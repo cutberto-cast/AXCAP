@@ -3,17 +3,15 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 
-// Definición de datos de proyectos estáticos
 const showcaseProjects = [
     {
         id: "formed-wood",
-        title: "Formed Wood",
+        title: "Madera & Forma",
         categoryGroup: "Páginas Web",
         category: "E-Commerce / Branding",
         tech: ["Next.js", "Tailwind", "Vercel"],
-        // TODO: Asegúrate de reemplazar esta ruta en cuanto agregues la imagen original a public/image
-        images: ["/image/cafecito.png"],
-        shortDescription: "Plataforma inmersiva diseñada para maximizar el tiempo de retención y la conversión de clientes premium. Cuenta con una arquitectura ultrarrápida que minimiza la tasa de rebote desde el primer segundo de carga.",
+        images: ["/image/taller-sillas/taller1.svg", "/image/taller-sillas/taller2.svg", "/image/taller-sillas/taller3.svg", "/image/taller-sillas/taller4.svg"],
+        shortDescription: "Sitio web moderno y minimalista para un taller especializado en sillas de jardín con diseño de vanguardia. El desarrollo incluye una imagen Hero con efecto de construcción tipo frames, sección de productos destacados, integración de reserva directa por WhatsApp, y un enfoque 100% responsivo y optimizado para ofrecer una experiencia ágil, visual y funcional en cualquier dispositivo.",
         features: ["Carga sub-segundo", "Optimización SEO Técnica", "Catálogo ágil"],
         url: "https://formed-wood.vercel.app/"
     },
@@ -23,8 +21,8 @@ const showcaseProjects = [
         categoryGroup: "Páginas Web",
         category: "Landing Page Corporativa",
         tech: ["Next.js", "React", "Tailwind"],
-        images: ["/image/dental-clinic.png"],
-        shortDescription: "Un embudo de ventas digital disfrazado de sitio web elegante. Cada sección está estructurada para fomentar confianza instantánea, impulsando llamados a la acción claros que multiplican orgánicamente las citas mensuales.",
+        images: ["/image/clinica-dental/dental1.svg", "/image/clinica-dental/dental2.svg", "/image/clinica-dental/dental3.svg"],
+        shortDescription: "Sitio web moderno y minimalista para una clínica dental, diseñado para transmitir confianza, limpieza y profesionalismo. La página incluye una video Hero, sección de servicios odontológicos, formulario de reservas integrado con envío directo a WhatsApp, y un desarrollo 100% responsivo y optimizado para garantizar una experiencia rápida, accesible y visualmente atractiva en cualquier dispositivo.",
         features: ["Integración de contacto directo", "Estética de alta confianza local", "Conversión dirigida"],
         url: "https://clinica-dental-landing-one.vercel.app/"
     },
@@ -34,20 +32,20 @@ const showcaseProjects = [
         categoryGroup: "Páginas Web",
         category: "Portafolio Híbrido",
         tech: ["Next.js", "Tailwind"],
-        images: ["/image/studio-tattoo.png"],
-        shortDescription: "Galería de altísimo impacto visual para estudio de tatuajes. Se construyó en dark-mode para proyectar la estética de marca, atrapando visualmente al prospecto y guiándolo eficientemente a la reservación.",
+        images: ["/image/studio-tattoo/tatto1.svg", "/image/studio-tattoo/tatto2.svg", "/image/studio-tattoo/tatto3.svg"],
+        shortDescription: "Sitio web moderno, minimalista y con una estética artística para un estudio de tatuajes. La página destaca por un Hero con video de fondo que refleja la esencia del estudio, seguido de una galería de trabajos, sección de artistas o estilos, y un formulario de reservas integrado con envío directo a WhatsApp. Todo el desarrollo es 100% responsivo y optimizado, cuidando la fluidez visual y la experiencia del usuario en cualquier dispositivo, con un diseño que prioriza el arte y la identidad visual del estudio",
         features: ["Visor inmersivo", "Flujo de conversión corto", "Dark Mode UI premium"],
         url: "https://nocturne-tattoo.vercel.app/"
     },
     {
         id: "admin-cafe",
-        title: "Admin Cafetería",
-        categoryGroup: "Sistemas de Gestión",
+        title: "Sistema de menú digital y gestión para negocios de comida",
+        categoryGroup: "Menú digital inteligente para negocios de comida",
         category: "Panel de Control Inteligente",
         tech: ["Next.js", "PostgreSQL", "Tailwind"],
-        images: ["/image/admin-cafe.png"],
-        shortDescription: "Sistema centralizado de administración, inventario y finanzas en tiempo real. Diseñado para aplastar el margen de error humano en cortes de caja, automatizando tareas pesadas para devolver decenas de horas productivas.",
-        features: ["Monitoreo en tiempo real", "Métricas de negocio integradas", "Punto de Venta Web"],
+        images: ["/image/cafecito/cafe1.svg", "/image/cafecito/cafe2.svg", "/image/cafecito/cafe3.svg", "/image/cafecito/cafe4.svg", "/image/cafecito/cafe5.svg"],
+        shortDescription: "Permite a tus clientes ver tu menú, personalizar su pedido y enviarlo listo por WhatsApp sin preguntas innecesarias. Optimiza tu tiempo, mejora la atención y aumenta tus ventas con un sistema profesional.",
+        features: ["Pedidos claros y sin errores", "Ahorro de tiempo en atención", "Panel fácil para gestionar tu menú y promociones"],
     }
 ];
 
@@ -113,7 +111,7 @@ function ProjectShowcase({ project }: { project: typeof showcaseProjects[0] }) {
 
             {/* Izquierda: Carrusel Estático de Imágenes */}
             <div className="w-full lg:w-1/2 xl:w-[45%] shrink-0">
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-black/40 border border-white/10 group shadow-inner">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-transparent group">
                     <Image
                         src={project.images[currentImg]}
                         alt={`Captura interface ${project.title}`}
@@ -122,25 +120,24 @@ function ProjectShowcase({ project }: { project: typeof showcaseProjects[0] }) {
                         unoptimized
                     />
 
-                    {/* Dark gradient overlap at bottom */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                    {/* Removed gradient overlay to assure no background */}
 
                     {/* Controles del Carrusel (Solo visibles si en el futuro agregas > 1 imagen) */}
                     {project.images.length > 1 && (
                         <>
-                            <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xl hover:bg-black/80 hover:scale-110 active:scale-95 duration-200">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+                            <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/20 text-white/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-md hover:bg-black/40 hover:text-white hover:scale-105 active:scale-95 duration-200 border border-white/5">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
                             </button>
-                            <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xl hover:bg-black/80 hover:scale-110 active:scale-95 duration-200">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                            <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/20 text-white/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-md hover:bg-black/40 hover:text-white hover:scale-105 active:scale-95 duration-200 border border-white/5">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
                             </button>
 
                             {/* Paginación */}
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
                                 {project.images.map((_, idx) => (
                                     <div
                                         key={idx}
-                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentImg ? "bg-white w-5" : "bg-white/40"}`}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentImg ? "w-4 bg-white/70" : "w-1.5 bg-white/20"}`}
                                     />
                                 ))}
                             </div>
@@ -151,7 +148,7 @@ function ProjectShowcase({ project }: { project: typeof showcaseProjects[0] }) {
 
             {/* Derecha: Descripción Analítica */}
             <div className="w-full lg:w-1/2 xl:w-[55%] flex flex-col justify-center">
-                
+
                 {/* Header (Título y Categoría inline) */}
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
                     <h3 className="text-2xl lg:text-3xl font-semibold text-white tracking-tight">
@@ -161,7 +158,7 @@ function ProjectShowcase({ project }: { project: typeof showcaseProjects[0] }) {
                         {project.category}
                     </div>
                 </div>
-                
+
                 <p className="text-white/85 font-light text-sm md:text-base mb-6 leading-relaxed">
                     {project.shortDescription}
                 </p>
